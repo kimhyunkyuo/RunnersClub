@@ -27,7 +27,11 @@ public class Member {
 
     private String password;
 
-    private String address;
+    private String zipcode;
+
+    private String streetadr;
+
+    private String detailadr;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -36,9 +40,11 @@ public class Member {
         return Member.builder()
                 .name(memberFormDto.getName())
                 .email(memberFormDto.getEmail())
-                .address(memberFormDto.getAddress())
                 .password(passwordEncoder.encode(memberFormDto.getPassword()))
-                .role(Role.USER) // 예시로 USER 역할 설정
+                .zipcode(memberFormDto.getZipcode())
+                .streetadr(memberFormDto.getStreetadr())
+                .detailadr(memberFormDto.getDetailadr())
+                .role(Role.USER)
                 .build();
 
     }

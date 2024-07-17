@@ -4,14 +4,43 @@
       layout:decorate="~{layout/default}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>메인페이지</title>
 </head>
+<th:block layout:fragment="css">
+
+    <style>
+        .carousel-item img {
+            width: 100%;
+            height: 400px; /* 원하는 높이로 조정 */
+            object-fit: cover; /* 이미지를 컨테이너에 맞게 조정 */
+        }
+    </style>
+</th:block>
 <body>
 
 <div layout:fragment="content">
 
-
+    <div id="carouselExampleAutoplaying" class="carousel slide " data-bs-ride="carousel" style="">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="/img/alpafly.png" class="d-block " alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="/img/lgo.png" class="d-block " alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="/img/lgo.png" class="d-block " alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
-
+</div>
 </body>
 </html>
