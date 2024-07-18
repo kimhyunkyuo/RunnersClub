@@ -30,7 +30,14 @@ class ItemControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/admin/item/new"))
                 .andDo(print())
                 .andExpect(status().isOk());
-
-
     }
-}
+    @Test
+    @DisplayName("상품등록 페이지 권한 테스트")
+    @WithMockUser(username = "user" , roles = "USER")
+    public void itemFormTest2() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/admin/item/new"))
+                .andDo(print())
+                .andExpect(status().isForbidden());
+
+        }
+    }

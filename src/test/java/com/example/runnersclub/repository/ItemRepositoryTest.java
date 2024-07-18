@@ -59,8 +59,6 @@ class ItemRepositoryTest {
         }
 
     }
-
-
     @Test
     @DisplayName("상품명 OR 상품상세설명 조회 테스트")
     public void findByItemListOrItemDetailTest(){

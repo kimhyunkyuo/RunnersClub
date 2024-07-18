@@ -36,6 +36,10 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    // 소셜 로그인
+    private String provider;
+    private String providerId;
+
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         return Member.builder()
                 .name(memberFormDto.getName())
@@ -48,4 +52,16 @@ public class Member {
                 .build();
 
     }
+
+    @Builder(builderClassName = "OAuth2Register", builderMethodName = "oauth2Register")
+    public Member(String name, String password, String email, Role role, String provider, String providerId) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.provider = provider;
+        this.providerId = providerId;
     }
+
+
+}

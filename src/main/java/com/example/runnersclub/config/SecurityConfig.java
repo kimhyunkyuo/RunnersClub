@@ -1,10 +1,12 @@
 package com.example.runnersclub.config;
 
 import com.example.runnersclub.service.MemberService;
+import com.example.runnersclub.service.PrincipalOauth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,7 +19,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
 
     private final MemberService memberService;
-
+    private final PrincipalOauth2UserService principalOauth2UserService;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf
@@ -37,7 +39,7 @@ public class SecurityConfig {
                 .failureUrl("/members/login/error") // 로그인 실패 시 리다이렉트할 URL 설정
                 .usernameParameter("email") // 로그인 폼에서 사용자명 필드의 name 속성 값
                 .passwordParameter("password") // 로그인 폼에서 비밀번호 필드의 name 속성 값
-        )
+                )
 
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))  // 로그아웃 URL 설정
@@ -45,14 +47,17 @@ public class SecurityConfig {
                         .invalidateHttpSession(true) // 세션 무효화
                         .deleteCookies("JSESSIONID") // JSESSIONID 쿠키 삭제
                 )
+
+                .oauth2Login((oauth2) -> oauth2
+                        .loginPage("/oauth2/authorization/google")
+                        .defaultSuccessUrl("/")
+                        .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint.userService(principalOauth2UserService))
+                )
+
                 .exceptionHandling(authenticationManager -> authenticationManager
                          .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
 
                 return http.build();
     }
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }
