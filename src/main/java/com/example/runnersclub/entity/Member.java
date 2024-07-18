@@ -44,7 +44,7 @@ public class Member {
                 .zipcode(memberFormDto.getZipcode())
                 .streetadr(memberFormDto.getStreetadr())
                 .detailadr(memberFormDto.getDetailadr())
-                .role(Role.USER)
+                .role(Role.ADMIN)
                 .build();
 
     }

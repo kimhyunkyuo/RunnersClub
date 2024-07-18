@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <title>header</title>
@@ -9,8 +11,9 @@
     <div class="container py-1">
         <div class="d-flex justify-content-end">
             <ul class="nav">
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-3">로그인</a></li>
-                <li class="nav-item"><a href="/members/new" class="nav-link link-body-emphasis px-1">회원가입</a></li>
+                <li class="nav-item"><a href="/members/login" class="nav-link link-body-emphasis px-3"   sec:authorize="!isAuthenticated()" >로그인</a></li>
+                <li class="nav-item"><a href="/members/new" class="nav-link link-body-emphasis px-1"  sec:authorize="!isAuthenticated()" >회원가입</a></li>
+                <li class="nav-item"><a href="/members/logout" class="nav-link link-body-emphasis px-1"  sec:authorize="isAuthenticated()" >로그아웃</a></li>
             </ul>
         </div>
     </div>
@@ -20,10 +23,15 @@
                 <span class="fs-2">Runners club</span>
             </a>
             <ul class="nav  nav-underline nav-center d-flex justify-content-center">
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-4">상품등록</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-4">상품관리</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-4">장바구니</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-4">구매이력</a></li>
+                <li class="nav-item"><a href="/admin/item/new" class="nav-link link-body-emphasis px-4"
+                                        sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품등록</a>
+                </li>
+                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-4"
+                                        sec:authorize="hasAnyAuthority('ROLE_ADMIN')" >상품관리</a></li>
+                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-4"
+                                        sec:authorize="isAuthenticated()">장바구니</a></li>
+                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-4"
+                                        sec:authorize="isAuthenticated()">구매이력</a></li>
             </ul>
             <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search">

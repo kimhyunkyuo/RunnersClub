@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http//www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/default}">>
-<head>
+      layout:decorate="~{layout/default}">
+  <head>
     <meta charset="UTF-8">
     <title>회원가입 페이지</title>
 </head>
@@ -13,20 +13,53 @@
             color: red;
         }
         .form-control-lg {
-            padding: 0.5rem 0.85rem; /* 입력 칸의 패딩을 조정하여 세로 폭을 증가 */            font-size: 1rem; /* 폰트 크기를 증가 */
+            padding: 0.5rem 0.85rem;
+            font-size: 1rem;
+            width: 100%; /* 가로 폭을 100%로 설정 */
         }
         .btn-custom {
-            padding: 0.75rem 0.85rem; /* 버튼의 패딩을 조정하여 세로 폭을 증가 */
-            font-size: 1.1rem; /* 폰트 크기를 증가 */
-            background-color: black; /* 버튼 배경색을 검은색으로 변경 */
-            border-color: black; /* 버튼 테두리 색을 검은색으로 변경 */
-            color: white; /* 버튼 글자 색을 흰색으로 변경 */
+            padding: 0.75rem 0.85rem;
+            font-size: 1.1rem;
+            background-color: black;
+            border-color: black;
+            color: white;
         }
         .btn-custom:hover {
-            background-color: black; /* 마우스 오버 시에도 검은색 유지 */
-            border-color: black; /* 마우스 오버 시에도 테두리 색 유지 */
-            color: white; /* 마우스 오버 시에도 글자 색 흰색 유지 */
+            background-color: black;
+            border-color: black;
+            color: white;
         }
+        #mail-check-warn {
+            display: block;
+            margin-top: 5px;
+            font-size: 1em;
+        }
+        .register-container {
+            max-width: 600px;
+            margin-top: 50px;
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .register-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .register-header h2 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-control {
+            height: 45px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
     </style>
 </th:block>
 
@@ -121,53 +154,64 @@
 
 <body>
 <div layout:fragment="content">
-    <div style="text-align: center ; margin-top: 50px;"><h2 >회원 가입</h2></div>
-
-    <div class="container mt-4">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
-                <form action="/members/new" role="form" method="post" th:object="${memberFormDto}" >
-                    <div class="form-group mb-3">
-                        <label th:for="name">이름</label>
-                        <input type="text" th:field="*{name}" class="form-control form-control-lg" placeholder="이름을 입력해주세요">
-                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">Incorrect data</p>
+                <div class="register-container">
+                    <div class="register-header">
+                        <h2>회원 가입</h2>
                     </div>
-                    <div class="form-group mb-3">
-                        <label th:for="email">이메일주소</label></br>
-                        <input type="email" th:field="*{email}" name="mail" id="mail" class="form-control form-control-lg"  style="width: 78%; display: inline;" placeholder="이메일을 입력해주세요">
-                        <input type="button" id="sendBtn"  class="btn btn-primary" name="sendBtn" onclick="sendNumber()" value="인증번호 전송">
-                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect data</p>
-                    </div>
-                    <div class="form-group  mb-3" id="mail_number" name="mail_number">
-                        <input type="text" name="number" id="number" class="form-control" style="width: 81%; display: inline;" placeholder="인증번호 입력">
-                        <span id="mail-check-warn"></span>
-                        <input type="button" name="confirmBtn" id="confirmBtn"  class="btn btn-primary"  onclick="confirmNumber()" value="이메일 인증">
-                        <br>
-                        <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label th:for="password">비밀번호</label>
-                        <input type="password" th:field="*{password}" class="form-control form-control-lg" placeholder="비밀번호 입력">
-                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">Incorrect data</p>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label th:for="zipcode">우편번호</label><br/>
-                        <input type="text" name="addr1" id="addr1" th:field="*{zipcode}" class="form-control form-control-lg"  style="width: 79%; display: inline;" placeholder="우편번호를 입력하세요"  readonly>
-                        <input type="button" id="zipp_btn" class="btn btn-primary" onclick="execPostCode()" value="우편번호 찾기"><br>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <input type="text" name="addr2" id="addr2" th:field="*{streetadr}" class="form-control form-control-lg"  placeholder="도로명 주소를 입력하세요" readonly>
-                    </div>
-                    <div class="form-group mb-3">
-                        <input type="text" class="form-control form-control-lg" name="addr3" id="addr3" th:field="*{detailadr}" placeholder="상세 주소를 입력하세요">
-                    </div>
-                    <br>
-                    <br>
-                    <div class="form-group mb-3">
-                        <button type="submit" class=" btn btn-custom w-100" >회원가입 완료</button>
-                    </div>
-                </form>
+                    <form action="/members/new" role="form" method="post" th:object="${memberFormDto}">
+                        <div class="form-group mb-3">
+                            <label th:for="name">이름</label>
+                            <input type="text" th:field="*{name}" class="form-control form-control-lg" placeholder="이름을 입력해주세요">
+                            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">Incorrect data</p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label th:for="email">이메일주소</label><br>
+                            <div class="input-group">
+                                <input type="email" th:field="*{email}" name="mail" id="mail" class="form-control form-control-lg" placeholder="이메일을 입력해주세요">
+                                <div class="input-group-append">
+                                    <button type="button" id="sendBtn" class="btn btn-primary" onclick="sendNumber()">인증번호 전송</button>
+                                </div>
+                            </div>
+                            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect data</p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="input-group">
+                                <input type="text" name="number" id="number" class="form-control form-control-lg" placeholder="인증번호 입력" required>
+                                <div class="input-group-append">
+                                    <button type="button" name="confirmBtn" id="confirmBtn" class="btn btn-primary" onclick="confirmNumber()">이메일 인증</button>
+                                </div>
+                            </div>
+                            <span id="mail-check-warn"></span>
+                            <input type="hidden" id="Confirm" name="Confirm" value="">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label th:for="password">비밀번호</label>
+                            <input type="password" th:field="*{password}" class="form-control form-control-lg" placeholder="비밀번호 입력">
+                            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">Incorrect data</p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label th:for="zipcode">우편번호</label><br>
+                            <div class="input-group">
+                                <input type="text" name="addr1" id="addr1" th:field="*{zipcode}" class="form-control form-control-lg" placeholder="우편번호를 입력하세요" readonly>
+                                <div class="input-group-append">
+                                    <button type="button" id="zipp_btn" class="btn btn-primary" onclick="execPostCode()">우편번호 찾기</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" name="addr2" id="addr2" th:field="*{streetadr}" class="form-control form-control-lg" placeholder="도로명 주소를 입력하세요" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control form-control-lg" name="addr3" id="addr3" th:field="*{detailadr}" placeholder="상세 주소를 입력하세요">
+                        </div>
+                        <div class="form-group mb-3">
+                            <button type="submit" class="btn btn-custom w-100">회원가입 완료</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
