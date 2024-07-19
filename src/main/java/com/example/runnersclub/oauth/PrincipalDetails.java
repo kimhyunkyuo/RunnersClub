@@ -1,4 +1,4 @@
-package com.example.runnersclub.service;
+package com.example.runnersclub.oauth;
 
 import com.example.runnersclub.entity.Member;
 import lombok.Getter;
@@ -20,11 +20,6 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
     private Member member;
     private Map<String, Object> attributes;
-
-    public PrincipalDetails(Member member){
-
-        this.member = member;
-    }
     public PrincipalDetails(Member member, Map<String, Object> attributes) {
 
         this.member = member;

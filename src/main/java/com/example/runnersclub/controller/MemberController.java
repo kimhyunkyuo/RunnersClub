@@ -4,7 +4,7 @@ import com.example.runnersclub.dto.MemberFormDto;
 import com.example.runnersclub.entity.Member;
 import com.example.runnersclub.repository.MemberRepository;
 import com.example.runnersclub.service.MemberService;
-import com.example.runnersclub.service.PrincipalDetails;
+import com.example.runnersclub.oauth.PrincipalDetails;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

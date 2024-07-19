@@ -1,9 +1,10 @@
-package com.example.runnersclub.service;
+package com.example.runnersclub.oauth;
 
 import com.example.runnersclub.constant.Role;
 import com.example.runnersclub.entity.Member;
 import com.example.runnersclub.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -15,6 +16,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
     private final MemberRepository memberRepository;
@@ -24,7 +26,9 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException{
 
         OAuth2User oAuth2User = super.loadUser(userRequest);
+        log.info("getAttributes : {}",oAuth2User.getAttributes());
 
+        //소셜 로그인 제공자 정보
         String provider = userRequest.getClientRegistration().getRegistrationId();
         String providerId = oAuth2User.getAttribute("sub");
         String name = provider+ "_" + providerId;
