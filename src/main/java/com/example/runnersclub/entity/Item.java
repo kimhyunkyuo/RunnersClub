@@ -1,6 +1,7 @@
 package com.example.runnersclub.entity;
 
 import com.example.runnersclub.constant.ItemSellStatus;
+import com.example.runnersclub.dto.ItemFormDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,5 +37,12 @@ public class Item extends BaseEntity {
     private ItemSellStatus itemSellStatus;
 
 
+    public void updateItem(ItemFormDto itemFormDto){
+        this.itemNm = itemFormDto.getItemNm();
+        this.price = itemFormDto.getPrice();
+        this.stockNumber = itemFormDto.getStockNumber();
+        this.itemDetail = itemFormDto.getItemDetail();
+        this.itemSellStatus = itemFormDto.getItemSellStatus();
+    }
 
 }
