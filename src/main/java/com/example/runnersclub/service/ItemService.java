@@ -2,12 +2,15 @@ package com.example.runnersclub.service;
 
 import com.example.runnersclub.dto.ItemFormDto;
 import com.example.runnersclub.dto.ItemImgDto;
+import com.example.runnersclub.dto.ItemSearchDto;
 import com.example.runnersclub.entity.Item;
 import com.example.runnersclub.entity.ItemImg;
 import com.example.runnersclub.repository.ItemImgRepository;
 import com.example.runnersclub.repository.ItemRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -72,5 +75,10 @@ public class ItemService {
             itemImgService.updateItemImg(itemImgIds.get(i),itemImgFileList.get(i));
         }
         return item.getId();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getAdminItemPage(itemSearchDto, pageable);
     }
 }
