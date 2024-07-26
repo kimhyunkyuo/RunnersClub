@@ -13,7 +13,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(value = {AuditingEntityListener.class})
 @MappedSuperclass  //공통매핑가능
 @Getter
-
 public abstract class BaseEntity extends BaseTimeEntity{
 
     @CreatedBy

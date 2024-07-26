@@ -3,6 +3,7 @@ package com.example.runnersclub.service;
 import com.example.runnersclub.dto.ItemFormDto;
 import com.example.runnersclub.dto.ItemImgDto;
 import com.example.runnersclub.dto.ItemSearchDto;
+import com.example.runnersclub.dto.MainItemDto;
 import com.example.runnersclub.entity.Item;
 import com.example.runnersclub.entity.ItemImg;
 import com.example.runnersclub.repository.ItemImgRepository;
@@ -80,5 +81,10 @@ public class ItemService {
     @Transactional(readOnly = true)
     public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
         return itemRepository.getAdminItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
 }

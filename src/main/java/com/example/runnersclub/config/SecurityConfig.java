@@ -23,7 +23,7 @@ public class SecurityConfig {
                         .ignoringRequestMatchers("/mail/**"))
                 .authorizeHttpRequests(
                         (authorizeRequests) -> authorizeRequests
-                                .requestMatchers("/css/**", "/js/**", "/img/**","mail/**").permitAll()
+                                .requestMatchers("/css/**", "/js/**", "/img/**","/mail/**","/item/**","/images/**").permitAll()
                                 .requestMatchers("/","/main.html","/members/**","/member/memberForm").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated())
