@@ -1,0 +1,54 @@
+.fieldError {
+    color: red;
+}
+.form-control-lg {
+    padding: 0.5rem 0.85rem;
+    font-size: 1rem;
+    width: 100%; /* 가로 폭을 100%로 설정 */
+}
+.btn-custom {
+    padding: 0.75rem 0.85rem;
+    font-size: 1.1rem;
+    background-color: black;
+    border-color: black;
+    color: white;
+}
+.btn-custom:hover {
+    background-color: black;
+    border-color: black;
+    color: white;
+}
+#mail-check-warn {
+    display: block;
+    margin-top: 5px;
+    font-size: 1em;
+}
+.register-container {
+    max-width: 600px;
+    margin-top: 50px;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.register-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.register-header h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-control {
+    height: 45px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+.btn-outline-primary{
+    margin-left: 20px;
+    margin-top: 2px;
+}

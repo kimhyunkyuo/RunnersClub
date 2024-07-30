@@ -20,7 +20,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/mail/**"))
+                        .ignoringRequestMatchers("/mail/**","/members/findId"))
                 .authorizeHttpRequests(
                         (authorizeRequests) -> authorizeRequests
                                 .requestMatchers("/css/**", "/js/**", "/img/**","/mail/**","/item/**","/images/**").permitAll()

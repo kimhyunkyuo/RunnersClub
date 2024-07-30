@@ -5,39 +5,72 @@
 <head>
     <meta charset="UTF-8">
     <title>header</title>
+
 </head>
+
+
 <body>
 <div th:fragment="header">
-    <div class="container py-1">
-        <div class="d-flex justify-content-end">
-            <ul class="nav">
-                <li class="nav-item"><a href="/members/login" class="nav-link link-body-emphasis px-3"   sec:authorize="!isAuthenticated()" >로그인</a></li>
+    <div class="container py-1 ">
+        <div class="d-flex justify-content-end ">
+            <ul class="nav"style="font-size: 14px">
+                <li class="nav-item"><a href="/members/login" class="nav-link link-body-emphasis px-2"   sec:authorize="!isAuthenticated()" >로그인</a></li>
                 <li class="nav-item"><a href="/members/new" class="nav-link link-body-emphasis px-1"  sec:authorize="!isAuthenticated()" >회원가입</a></li>
+                <li class="nav-item"><a href="/orders" class="nav-link link-body-emphasis px-1"  sec:authorize="isAuthenticated()" >구매이력</a></li>
                 <li class="nav-item"><a href="/members/logout" class="nav-link link-body-emphasis px-1"  sec:authorize="isAuthenticated()" >로그아웃</a></li>
             </ul>
         </div>
     </div>
+
     <header class="py-2 mb-0 border-bottom">
-        <div class="container d-flex flex-wrap justify-content-between align-items-center">
-            <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
-                <span class="fs-2">Runners club</span>
-            </a>
-            <ul class="nav  nav-underline nav-center d-flex justify-content-center">
-                <li class="nav-item"><a href="/admin/item/new" class="nav-link link-body-emphasis px-4"
-                                        sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품등록</a>
-                </li>
-                <li class="nav-item"><a href="/admin/items" class="nav-link link-body-emphasis px-4"
-                                        sec:authorize="hasAnyAuthority('ROLE_ADMIN')" >상품관리</a></li>
-                <li class="nav-item"><a href="/cart" class="nav-link link-body-emphasis px-4"
-                                        sec:authorize="isAuthenticated()">장바구니</a></li>
-                <li class="nav-item"><a href="/orders" class="nav-link link-body-emphasis px-4"
-                                        sec:authorize="isAuthenticated()">구매이력</a></li>
-            </ul>
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
-                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <a href="/" class="link-body-emphasis text-decoration-none">
+                    <span class="fs-2">Runners club</span>
+                </a>
+            </div>
+
+            <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="get">
+            <div class="search-container" style=" position: relative;  width: 400px; height: 45px;">
+                <input class="form-control search-input" type="search" placeholder="검색어를 입력해주세요"   name="searchQuery" aria-label="Search" style=" width: 100%; height: 100%;  padding-right: 40px;  border-radius: 10px; ">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style=" position: absolute; right: 10px;top: 50%;transform: translateY(-50%);width: 24px; height: 24px; cursor: pointer;">
+                    <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
+                </svg>
+            </div>
             </form>
+
+
+
+
+            <div class="d-flex align-items-center">
+                <a href="/cart" style="color: black">
+                <svg  xmlns="http://www.w3.org/2000/svg" width="50" height="35" fill="currentColor" class="svg-icon" viewBox="0 0 16 16" style="margin-right: 10px;">
+                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
+                </svg>
+                </a>
+                <a href="/members/myInfo"  style="color: black">
+                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="37" fill="currentColor" class="svg-icon" viewBox="0 0 16 16" style="margin-top: 6px">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                </svg>
+                </a>
+            </div>
         </div>
     </header>
+    <ul class="nav nav-underline nav-center d-flex justify-content-center" style="margin-bottom: 0.75rem; margin-top: 0.75rem">
+        <li class="nav-item" style="font-size: 20px; margin-right: 1.7rem;">
+            <a class="nav-link link-body-emphasis px-4" href="#">Active</a>
+        </li>
+        <li class="nav-item" style="font-size: 20px; margin-right: 1.7rem;">
+            <a class="nav-link link-body-emphasis px-4" href="#">Link</a>
+        </li>
+        <li class="nav-item" style="font-size: 20px; margin-right: 1.7rem;">
+            <a class="nav-link link-body-emphasis px-4" href="#">Link</a>
+        </li>
+        <li class="nav-item" style="font-size: 20px; margin-right: 1.7rem;">
+            <a class="nav-link link-body-emphasis px-4" href="#">Disabled</a>
+        </li>
+    </ul>
+
 </div>
 </body>
 </html>
