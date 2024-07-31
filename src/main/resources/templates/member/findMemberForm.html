@@ -7,6 +7,10 @@
     <title>비밀번호 찾기</title>
 </head>
 
+<th:block layout:fragment="css">
+    <link href="/css/myInfo.css" rel="stylesheet" />
+</th:block>
+
 <th:block layout:fragment="script">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -45,17 +49,32 @@
 <body>
 <div id="container" layout:fragment="content">
 
-    <form role="form" class="text-start" method="post" name="sendEmail" action="/members/sendEmail">
-        <br></br>
-        <h1 class="title" style="margin-top:40px">비밀번호 찾기</h1>
-        <div class="login-form">
+    <div class="d-flex" id="wrapper" style="border: none;">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper"  style="border: none;  border-right: none !important; " >
+            <div class="sidebar-heading ">마이페이지</div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/members/myInfo"  style="border: none">회원정보</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/cart"   style="border: none">장바구니</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/orders"  style="border: none">구매이력</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!"  style="border: none">Events</a>
+
+            </div>
+        </div>
+
+
+        <div class="container-fluid" style="margin-top: 100px">
+    <form role="form" class="text-start" method="post" name="sendEmail" action="/members/sendEmail" >
+
+        <h1 class="title" style="text-align:center">비밀번호 찾기</h1>
+        <div class="login-form " style="text-align: center">
             <div class="form-group">
-                <input type="email" id="email" name="memberEmail" class="form-control" placeholder="회원가입시 입력했던 이메일을 입력하세요." style="width:400px; margin-left:50px; margin-top:40px;" required>
-                <p style="margin-left:80px; margin-top:20px;">입력한 이메일로 임시 비밀번호가 전송됩니다!</p>
+                <input type="email" id="email" name="memberEmail" class="form-control" placeholder="회원가입시 입력했던 이메일을 입력하세요." style="width: 500px; margin-top: 25px; text-align: center; margin-left: 23%" required>
+                <p style="margin-top:20px; text-align: center">입력한 이메일로 임시 비밀번호가 전송됩니다!</p>
             </div>
             <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
             <div class="button_container">
-                <button type="button" id="checkEmail" class="button" style="margin-top:20px">&nbsp;&nbsp;비밀번호 발송&nbsp;&nbsp;</button>
+                <button type="button" id="checkEmail" class="btn btn-outline-dark" style="margin-top:20px; margin-bottom: 20px; text-align: center">&nbsp;&nbsp;비밀번호 발송&nbsp;&nbsp;</button>
                 <br>
             </div>
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
@@ -63,7 +82,8 @@
     </form>
 
 </div>
-
+    </div>
+</div>
 </body>
 
 </html>

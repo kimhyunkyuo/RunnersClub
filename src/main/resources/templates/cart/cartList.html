@@ -164,13 +164,8 @@
 
     <!-- 사용자 CSS 추가 -->
     <th:block layout:fragment="css">
+        <link href="/css/cart.css" rel="stylesheet" />
         <style>
-            .content-mg{
-                margin-left:25%;
-                margin-right:25%;
-                margin-top:2%;
-                margin-bottom:100px;
-            }
             .repImgDiv{
                 margin-right:15px;
                 margin-left:15px;
@@ -191,8 +186,20 @@
 
 </th:block>
 <body>
-<div layout:fragment="content" class="content-mg">
+<div layout:fragment="content" >
+    <div class="d-flex" id="wrapper" style="border: none;">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper"  style="border: none;  border-right: none !important; " >
+            <div class="sidebar-heading ">마이페이지</div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/members/myInfo"  style="border: none">회원정보</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/cart"   style="border: none">장바구니</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/orders"  style="border: none">구매이력</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!"  style="border: none">Events</a>
 
+            </div>
+        </div>
+        <div class="container-fluid" id="page-content-wrapper" >
     <h2 class="mb-4">
         장바구니 목록
     </h2>
@@ -258,6 +265,7 @@
         </div>
     </div>
 </div>
-
+    </div>
+</div>
 </body>
 </html>
