@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" html xmlns:th="http//www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/default}">
+      layout:decorate="~{layout/default}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title> 관리자 상품 등록페이지 </title>
 </head>
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
+    <link href="/css/myInfo.css" rel="stylesheet" />
+
     <style>
         .input-group {
             margin-bottom : 15px
@@ -17,11 +20,6 @@
         }
         .fieldError {
             color: #bd2130;
-        }
-
-
-        .content{
-            margin: 50px 200px 100px;
         }
     </style>
 </th:block>
@@ -53,8 +51,26 @@
 
 <body>
 <div layout:fragment="content" class="content">
+
+
+    <div class="d-flex" id="wrapper" style="border: none;">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper"  style="border: none;  border-right: none !important; " >
+            <div class="sidebar-heading ">마이페이지</div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/members/myInfo"  style="border: none">회원정보</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/cart"   style="border: none">장바구니</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/orders"  style="border: none">구매이력</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/item/new"  style="border: none"
+                   sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품등록</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/items"  style="border: none"
+                   sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품관리</a>
+            </div>
+        </div>
+        <div class="container-fluid" id="page-content-wrapper">
    <form role="form" method="post" enctype="multipart/form-data" th:object="${itemFormDto}">
-       <p class="h2"> 상품등록 </p>
+       <p class="h2" style="margin-bottom: 15px"> 상품등록 </p>
+
        <input type="hidden" th:field="*{id}">
 
        <div class="form-group mb-3">
@@ -123,6 +139,8 @@
        </div>
        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
    </form>
+</div>
+    </div>
 </div>
 </body>
 </html>

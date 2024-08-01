@@ -114,9 +114,10 @@
     <style>
         .mgb-15{
             margin-bottom:15px;
+            margin-top: 10px;
         }
         .mgt-30{
-            margin-top:30px;
+            margin-top:40px;
         }
         .mgt-50{
             margin-top:50px;
@@ -134,48 +135,50 @@
             height:auto;
             width:50%;
         }
+        .my-4{
+            opacity: 0.1;
+        }
+
     </style>
 </th:block>
 
 
 <body>
-<div layout:fragment="content" style="margin-left:25%;margin-right:25%">
-
+<div layout:fragment="content" style="margin-left:25%;margin-right:25%; margin-top: 70px">
     <input type="hidden" id="itemId" th:value="${item.id}">
-
     <div class="d-flex">
         <div class="repImgDiv">
             <img th:src="${item.itemImgDtoList[0].imgUrl}" class = "rounded repImg" th:alt="${item.itemNm}">
         </div>
-        <div class="wd50">
-            <span th:if="${item.itemSellStatus == T(com.example.runnersclub.constant.ItemSellStatus).SELL}" class="badge badge-primary mgb-15">
+        <div class="wd50" style="border-top: 2px solid black; margin-left: 20px" >
+            <span th:if="${item.itemSellStatus == T(com.example.runnersclub.constant.ItemSellStatus).SELL}" class="badge text-bg-primary mgb-15" >
                 판매중
             </span>
-            <span th:unless="${item.itemSellStatus == T(com.example.runnersclub.constant.ItemSellStatus).SELL}" class="badge btn-danger mgb-15" >
+            <span th:unless="${item.itemSellStatus == T(com.example.runnersclub.constant.ItemSellStatus).SELL}" class="badge text-bg-danger mgb-15">
                 품절
             </span>
             <div class="h4" th:text="${item.itemNm}"></div>
             <hr class="my-4">
 
-            <div class="text-right">
-                <div class="h4 text-danger text-left">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="h4">
                     <input type="hidden" th:value="${item.price}" id="price" name="price">
                     <span th:text="${item.price}"></span>원
                 </div>
-                <div class="input-group w-50">
+                <div class="input-group w-auto">
                     <div class="input-group-prepend">
                         <span class="input-group-text">수량</span>
                     </div>
                     <input type="number" name="count" id="count" class="form-control" value="1" min="1">
                 </div>
             </div>
-            <hr class="my-4">
 
+            <hr class="my-4">
             <div class="text-right mgt-50">
                 <h5>결제 금액</h5>
                 <h3 name="totalPrice" id="totalPrice" class="font-weight-bold"></h3>
             </div>
-            <div th:if="${item.itemSellStatus == T(com.example.runnersclub.constant.ItemSellStatus).SELL}" class="text-right">
+            <div th:if="${item.itemSellStatus == T(com.example.runnersclub.constant.ItemSellStatus).SELL}" class="text-right" style="margin-top: 20px">
                 <button type="button" class="btn btn-light border border-primary btn-lg" onclick="addCart()">장바구니 담기</button>
                 <button type="button" class="btn btn-primary btn-lg" onclick="order()">주문하기</button>
             </div>
@@ -185,9 +188,9 @@
         </div>
     </div>
 
-    <div class="jumbotron jumbotron-fluid mgt-30">
+    <div class=" mgt-30">
         <div class="container">
-            <h4 class="display-5">상품 상세 설명</h4>
+          <span style="font-size: 20px; font-weight: 550">상품정보</span>
             <hr class="my-4">
             <p class="lead" th:text="${item.itemDetail}"></p>
         </div>

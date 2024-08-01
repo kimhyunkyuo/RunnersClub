@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http//www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/default}">
+      layout:decorate="~{layout/default}" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
         <meta charset="utf-8" />
@@ -35,8 +35,10 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/members/myInfo"  style="border: none">회원정보</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/cart"   style="border: none">장바구니</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/orders"  style="border: none">구매이력</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!"  style="border: none">Events</a>
-
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/item/new"  style="border: none"
+                       sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품등록</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/items"  style="border: none"
+                       sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품관리</a>
                 </div>
             </div>
                         <!-- 본문-->

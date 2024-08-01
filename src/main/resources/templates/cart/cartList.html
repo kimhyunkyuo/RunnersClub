@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/default}">
+      layout:decorate="~{layout/default}" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>장바구니</title>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
-<!-- 사용자 스크립트 추가 -->
-<th:block layout:fragment="script">
+    <!-- 사용자 스크립트 추가 -->
+    <th:block layout:fragment="script">
 
     <script th:inline="javascript">
 
@@ -167,19 +167,17 @@
         <link href="/css/cart.css" rel="stylesheet" />
         <style>
             .repImgDiv{
-                margin-right:15px;
-                margin-left:15px;
+                margin-right:20px;
+                margin-left:70px;
                 height:auto;
             }
             .repImg{
                 height:100px;
                 width:100px;
             }
+
             .fs18{
                 font-size:18px
-            }
-            .fs24{
-                font-size:24px
             }
         </style>
     </th:block>
@@ -195,8 +193,10 @@
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/members/myInfo"  style="border: none">회원정보</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/cart"   style="border: none">장바구니</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/orders"  style="border: none">구매이력</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!"  style="border: none">Events</a>
-
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/item/new"  style="border: none"
+                   sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품등록</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/items"  style="border: none"
+                   sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품관리</a>
             </div>
         </div>
         <div class="container-fluid" id="page-content-wrapper" >
@@ -204,67 +204,72 @@
         장바구니 목록
     </h2>
 
-    <div>
-        <table class="table">
-            <colgroup>
-                <col width="15%"/>
-                <col width="70%"/>
-                <col width="15%"/>
-            </colgroup>
-            <thead>
-            <tr class="text-center">
-                <td>
-                    <input type="checkbox" id="checkall" onclick="checkAll()"> 전체선택
-                </td>
-                <td>상품정보</td>
-                <td>상품금액</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="cartItem : ${cartItems}">
-                <td class="text-center align-middle">
-                    <input type="checkbox" name="cartChkBox" th:value="${cartItem.cartItemId}">
-                </td>
-                <td class="d-flex">
-                    <div class="repImgDiv align-self-center">
-                        <img th:src="${cartItem.imgUrl}" class = "rounded repImg" th:alt="${cartItem.itemNm}">
-                    </div>
-                    <div class="align-self-center">
-                        <span th:text="${cartItem.itemNm}" class="fs24 font-weight-bold"></span>
-                        <div class="fs18 font-weight-light">
-                            <span class="input-group mt-2">
-                                <span th:id="'price_' + ${cartItem.cartItemId}"
-                                      th:data-price="${cartItem.price}"
-                                      th:text="${cartItem.price} + '원'" class="align-self-center mr-2">
-                                </span>
-                                <input type="number" name="count" th:id="'count_' + ${cartItem.cartItemId}"
-                                       th:value="${cartItem.count}" min="1"
-                                       onchange="changeCount(this)" class="form-control mr-2" >
-                                <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true" th:data-id="${cartItem.cartItemId}" onclick="deleteCartItem(this)">&times;</span>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                </td>
-                <td class="text-center align-middle">
+            <div>
+                <table class="table" style="width: 1100px;">
+                    <colgroup>
+                        <col width="13%"/>
+                        <col width="20%"/>
+                        <col width="25%"/>
+                        <col width="17%"/>
+                        <col width="10%"/>
+                        <col width="15%"/>
+                    </colgroup>
+                    <thead>
+                    <tr class="text-center" style="font-weight: bold; font-size: 18px">
+                        <td>
+                            <input type="checkbox" id="checkall" onclick="checkAll()"> 전체선택
+                        </td>
+                        <td>상품이미지</td>
+                        <td>상품이름</td>
+                        <td>상품수량</td>
+                        <td>상품금액</td>
+                        <td>총금액</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cartItem : ${cartItems}">
+                        <td class="text-center align-middle">
+                            <input type="checkbox" name="cartChkBox" th:value="${cartItem.cartItemId}">
+                        </td>
+                        <td class="text-center align-middle">
+                            <img th:src="${cartItem.imgUrl}" class="rounded repImg" th:alt="${cartItem.itemNm}">
+                        </td>
+                        <td class="text-center align-middle">
+                            <span th:text="${cartItem.itemNm}" class="fs18"></span>
+                        </td>
+                        <td class="text-center align-middle">
+                    <span class="input-group">
+                        <input type="number" name="count" th:id="'count_' + ${cartItem.cartItemId}"
+                               th:value="${cartItem.count}" min="1"
+                               onchange="changeCount(this)" class="form-control" >
+                        <button type="button" class="btn-close" aria-label="Close" th:data-id="${cartItem.cartItemId}" onclick="deleteCartItem(this)" style="margin-top: 6px"></button>
+
+                    </span>
+                        </td>
+                        <td class="text-center align-middle">
+                    <span th:id="'price_' + ${cartItem.cartItemId}"
+                          th:data-price="${cartItem.price}"
+                          th:text="${cartItem.price} + '원'">
+                    </span>
+                        </td>
+                        <td class="text-center align-middle">
                     <span th:id="'totalPrice_' + ${cartItem.cartItemId}"
                           name="totalPrice" th:text="${cartItem.price * cartItem.count} + '원'">
                     </span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
-        <h2 class="text-center">
-            총 주문 금액 : <span id="orderTotalPrice" class="text-danger">0원</span>
-        </h2>
+                <h2 class="text-center">
+                    총 주문 금액 : <span id="orderTotalPrice" class="text-danger">0원</span>
+                </h2>
 
-        <div class="text-center mt-3">
-            <button type="button" class="btn btn-primary btn-lg" onclick="orders()">주문하기</button>
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-outline-success" onclick="orders()">주문하기</button>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
     </div>
 </div>
 </body>
