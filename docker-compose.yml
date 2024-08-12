@@ -1,0 +1,28 @@
+#version: '3.8'
+
+services:
+  my-db:
+    container_name: mysql
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: runnersclub
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping"]
+      interval: 5s
+      retries: 10
+
+  springboot-app:
+    container_name: springboot-app
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      my-db:
+        condition: service_healthy
+    volumes:
+      - C:\runnersitemimg:/app/runnersitemimg
