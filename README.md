@@ -18,7 +18,7 @@
 - Spring Data JPA
 - OAuth2.0
 #### BuildTool
-- Gradle
+- Maven
 #### DataBase
 - MySQL
 
@@ -30,7 +30,7 @@
 - Kakao 주소 API
 - Google 로그인 API
 - TossPayments
-- 
+  
 ## 개발환경
 - IntelliJ
 - DBeaver
@@ -55,6 +55,8 @@
 ![스크린샷 2024-08-12 161024](https://github.com/user-attachments/assets/b9bc5fe3-77ed-489d-95ad-20253209a508)
 ![스크린샷 2024-08-12 161019](https://github.com/user-attachments/assets/31c59b5b-0d39-46d6-9d30-aa5c549ef5c6)
 
+## 실행
+
 
 ## 프로젝트 후기
 혼자 공부하며 처음 만들어본 프로젝트이기 때문에 부족한 부분에 대한 아쉬움도 많이 남았습니다.
@@ -63,3 +65,5 @@
 
 ## 프로젝트 보안사항
 아직 많이 부족한 홈페이지만큼 홈페이지를 이용하는 고객들의 편의를 위해 더욱더 깔끔한 UI, 개인정보확인, 비빌번호 찾기 더 나아가 결제 서비스 구현하여 프로젝트의 완성도를 높이겠습니다.
+
+## 참고자료
