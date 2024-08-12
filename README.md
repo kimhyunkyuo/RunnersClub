@@ -18,6 +18,7 @@
 - Spring Data JPA
 - OAuth2.0
 - Querydsl
+- Docker
 #### BuildTool
 - Maven
 #### DataBase
@@ -51,10 +52,14 @@
 ![RunnersclubERD](https://github.com/user-attachments/assets/71724dd7-590a-4c66-9d9b-c54f837b6be1)
 
 ## API 명세서
-![스크린샷 2024-08-12 161013](https://github.com/user-attachments/assets/a6c6442c-2da6-4a92-abf8-7bc4264ae0ea)
-![스크린샷 2024-08-12 161007](https://github.com/user-attachments/assets/1cf131f3-0d84-4d31-999d-9872e4f023eb)
-![스크린샷 2024-08-12 161024](https://github.com/user-attachments/assets/b9bc5fe3-77ed-489d-95ad-20253209a508)
-![스크린샷 2024-08-12 161019](https://github.com/user-attachments/assets/31c59b5b-0d39-46d6-9d30-aa5c549ef5c6)
+
+![스크린샷 2024-08-12 231445](https://github.com/user-attachments/assets/8e25a75b-2c11-4efa-88b7-6c07e4a3d6c9)
+![스크린샷 2024-08-12 231454](https://github.com/user-attachments/assets/231b9029-ffdf-46c5-b21b-322ba6d851ed)
+![스크린샷 2024-08-12 231500](https://github.com/user-attachments/assets/ae8d5d59-e543-4e6d-a6b4-72c51092fae1)
+![스크린샷 2024-08-12 231504](https://github.com/user-attachments/assets/7e971e6d-dcd8-47ab-898b-35c619134b75)
+![스크린샷 2024-08-12 231637](https://github.com/user-attachments/assets/5f1ee5d3-b82c-47ce-b1a3-3140581bcaae)
+
+
 
 ## 실행
 
