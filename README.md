@@ -57,7 +57,8 @@
 - tossPaymets와 연결하여 주문기능 구현 
 
 ## ERD 다이어그램
-[![Video Label](http://img.youtube.com/vi/'rHHF39xR8lU'/0.jpg)](https://youtu.be/'rHHF39xR8lU')
+![RunnersclubERD](https://github.com/user-attachments/assets/a21db42a-b02a-4c90-917a-006069e326ea)
+
 
 ## API 명세서
 
@@ -70,8 +71,7 @@
 
 
 ## 프로젝트 시연영상
-[![Video Label](http://img.youtube.com/vi/'https://youtu.be/rHHF39xR8lU'/0.jpg)](https://youtu.be/'https://youtu.be/rHHF39xR8lU')
-[![Video Label](http://img.youtube.com/vi/qrJZxsNvKAE/0.jpg)](https://youtu.be/qrJZxsNvKAE?t=0s)
+[![Video Label](http://img.youtube.com/vi/'rHHF39xR8lU'/0.jpg)](https://youtu.be/'rHHF39xR8lU')
 ## 프로젝트 보안사항
 
 ## 프로젝트 후기
