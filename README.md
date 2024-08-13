@@ -71,7 +71,7 @@
 
 ## 프로젝트 시연영상
 [![Video Label](http://img.youtube.com/vi/'https://youtu.be/rHHF39xR8lU'/0.jpg)](https://youtu.be/'https://youtu.be/rHHF39xR8lU')
-
+[![Video Label](http://img.youtube.com/vi/qrJZxsNvKAE/0.jpg)](https://youtu.be/qrJZxsNvKAE?t=0s)
 ## 프로젝트 보안사항
 
 ## 프로젝트 후기
